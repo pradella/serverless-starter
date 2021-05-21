@@ -1,0 +1,70 @@
+service: serverless-starter
+
+frameworkVersion: "2"
+
+plugins:
+  - serverless-bundle
+  - serverless-pseudo-parameters
+  - serverless-deployment-bucket
+  - serverless-plugin-log-retention
+  - serverless-dotenv-plugin
+  - serverless-domain-manager
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  profile: ${env:AWS_PROFILE}
+  stage: ${opt:stage, 'dev'}
+  region: ${env:AWS_PROJECT_REGION}
+  environment:
+    STAGE: ${self:provider.stage}
+  deploymentBucket:
+    name: ${self:custom.DeploymentBucket.name}
+    serverSideEncryption: AES256
+
+functions:
+  hello:
+    handler: src/handlers/hello.handler
+    events:
+      - http:
+          path: hello
+          method: GET
+          cors: ${file(config/cors.yml):cors}
+
+resources:
+  Resources:
+    # not sure why these resources (Renan must know why it is important)
+    BadRequestBody400: ${file(resources/ApiGatewayBadResponsesCors.yml):BadRequestBody400}
+    DEFAULT4XX: ${file(resources/ApiGatewayBadResponsesCors.yml):DEFAULT4XX}
+    DEFAULT5XX: ${file(resources/ApiGatewayBadResponsesCors.yml):DEFAULT5XX}
+    ACCESSDENIED: ${file(resources/ApiGatewayBadResponsesCors.yml):ACCESSDENIED}
+    BADREQUESTPARAMETERS: ${file(resources/ApiGatewayBadResponsesCors.yml):BADREQUESTPARAMETERS}
+    EXPIREDTOKEN: ${file(resources/ApiGatewayBadResponsesCors.yml):EXPIREDTOKEN}
+    AUTHORIZERFAILURE: ${file(resources/ApiGatewayBadResponsesCors.yml):AUTHORIZERFAILURE}
+    INTEGRATIONFAILURE: ${file(resources/ApiGatewayBadResponsesCors.yml):INTEGRATIONFAILURE}
+    INTEGRATIONTIMEOUT: ${file(resources/ApiGatewayBadResponsesCors.yml):INTEGRATIONTIMEOUT}
+    QUOTAEXCEEDED: ${file(resources/ApiGatewayBadResponsesCors.yml):QUOTAEXCEEDED}
+    REQUESTTOOLARGE: ${file(resources/ApiGatewayBadResponsesCors.yml):REQUESTTOOLARGE}
+    THROTTLED: ${file(resources/ApiGatewayBadResponsesCors.yml):THROTTLED}
+    UNAUTHORIZED: ${file(resources/ApiGatewayBadResponsesCors.yml):UNAUTHORIZED}
+    # specify other resources for this service below:
+
+custom:
+  bundle:
+    sourcemaps: false
+    linting: false
+  DeploymentBucket:
+    name: sls-deployment-bucket-${env:AWS_PROFILE}
+  logRetentionInDays: 30
+  customDomain:
+    domainName: ${env:API_GATEWAY_DOMAIN}
+    stage: ${self:provider.stage}
+    basePath: ${env:API_GATEWAY_BASE_PATH}
+    certificateName: ${env:API_GATEWAY_CERTIFICATE_NAME}
+    createRoute53Record: true
+    endpointType: "regional"
+    securityPolicy: tls_1_2
+    apiType: rest
+    autoDomain: true
+  frontendUrl: ${env:FRONTEND_URL}

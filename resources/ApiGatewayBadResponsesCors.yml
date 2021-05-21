@@ -1,0 +1,144 @@
+BadRequestBody400:
+  Type: "AWS::ApiGateway::GatewayResponse"
+  Properties:
+    ResponseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'${self:custom.frontendUrl}'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'set-cookies'"
+      gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+    ResponseTemplates:
+      application/json: '{"message":$context.error.messageString, "validation":"$context.error.validationErrorString"}'
+    ResponseType: BAD_REQUEST_BODY
+    RestApiId:
+      Ref: "ApiGatewayRestApi"
+
+DEFAULT4XX:
+  Type: "AWS::ApiGateway::GatewayResponse"
+  Properties:
+    ResponseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'${self:custom.frontendUrl}'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'set-cookies'"
+      gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+    ResponseType: DEFAULT_4XX
+    RestApiId:
+      Ref: "ApiGatewayRestApi"
+
+DEFAULT5XX:
+  Type: "AWS::ApiGateway::GatewayResponse"
+  Properties:
+    ResponseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'${self:custom.frontendUrl}'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'set-cookies'"
+      gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+    ResponseType: DEFAULT_5XX
+    RestApiId:
+      Ref: "ApiGatewayRestApi"
+
+ACCESSDENIED:
+  Type: "AWS::ApiGateway::GatewayResponse"
+  Properties:
+    ResponseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'${self:custom.frontendUrl}'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'set-cookies'"
+      gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+    ResponseType: ACCESS_DENIED
+    RestApiId:
+      Ref: "ApiGatewayRestApi"
+
+BADREQUESTPARAMETERS:
+  Type: "AWS::ApiGateway::GatewayResponse"
+  Properties:
+    ResponseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'${self:custom.frontendUrl}'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'set-cookies'"
+      gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+    ResponseType: BAD_REQUEST_PARAMETERS
+    RestApiId:
+      Ref: "ApiGatewayRestApi"
+
+EXPIREDTOKEN:
+  Type: "AWS::ApiGateway::GatewayResponse"
+  Properties:
+    ResponseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'${self:custom.frontendUrl}'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'set-cookies'"
+      gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+    ResponseType: EXPIRED_TOKEN
+    RestApiId:
+      Ref: "ApiGatewayRestApi"
+
+AUTHORIZERFAILURE:
+  Type: "AWS::ApiGateway::GatewayResponse"
+  Properties:
+    ResponseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'${self:custom.frontendUrl}'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'set-cookies'"
+      gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+    ResponseType: AUTHORIZER_FAILURE
+    RestApiId:
+      Ref: "ApiGatewayRestApi"
+
+INTEGRATIONFAILURE:
+  Type: "AWS::ApiGateway::GatewayResponse"
+  Properties:
+    ResponseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'${self:custom.frontendUrl}'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'set-cookies'"
+      gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+    ResponseType: INTEGRATION_FAILURE
+    RestApiId:
+      Ref: "ApiGatewayRestApi"
+
+INTEGRATIONTIMEOUT:
+  Type: "AWS::ApiGateway::GatewayResponse"
+  Properties:
+    ResponseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'${self:custom.frontendUrl}'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'set-cookies'"
+      gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+    ResponseType: INTEGRATION_TIMEOUT
+    RestApiId:
+      Ref: "ApiGatewayRestApi"
+
+QUOTAEXCEEDED:
+  Type: "AWS::ApiGateway::GatewayResponse"
+  Properties:
+    ResponseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'${self:custom.frontendUrl}'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'set-cookies'"
+      gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+    ResponseType: QUOTA_EXCEEDED
+    RestApiId:
+      Ref: "ApiGatewayRestApi"
+
+REQUESTTOOLARGE:
+  Type: "AWS::ApiGateway::GatewayResponse"
+  Properties:
+    ResponseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'${self:custom.frontendUrl}'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'set-cookies'"
+      gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+    ResponseType: REQUEST_TOO_LARGE
+    RestApiId:
+      Ref: "ApiGatewayRestApi"
+
+THROTTLED:
+  Type: "AWS::ApiGateway::GatewayResponse"
+  Properties:
+    ResponseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'${self:custom.frontendUrl}'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'set-cookies'"
+      gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+    ResponseType: THROTTLED
+    RestApiId:
+      Ref: "ApiGatewayRestApi"
+
+UNAUTHORIZED:
+  Type: "AWS::ApiGateway::GatewayResponse"
+  Properties:
+    ResponseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'${self:custom.frontendUrl}'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'set-cookies'"
+      gatewayresponse.header.Access-Control-Allow-Credentials: "'true'"
+    ResponseType: UNAUTHORIZED
+    RestApiId:
+      Ref: "ApiGatewayRestApi"

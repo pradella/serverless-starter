@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "target": "ESNext",
+    "outDir": ".build",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "lib": ["ESNext"],
+    "rootDir": "./",
+    "baseUrl": "./"
+  }
+}
